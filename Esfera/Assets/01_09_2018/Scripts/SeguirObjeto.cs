@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SeguirObjeto : MonoBehaviour {
+	public GameObject objeto;
+	private Vector3 distancia;
+
+	void Start () {
+		distancia = transform.position - objeto.transform.position;
+	}
+	
+	void Update () {
+		transform.position = objeto.transform.position + distancia;		
+	}
+}
