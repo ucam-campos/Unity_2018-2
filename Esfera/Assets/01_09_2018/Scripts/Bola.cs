@@ -9,11 +9,15 @@ public class Bola : MonoBehaviour {
 	void Start () {
 		componenteRb = GetComponent<Rigidbody> ();
 	}
-	
+
+	void OnTriggerEnter (Collider outro) {
+		Destroy (outro.gameObject);
+	}
+
 	void Update () {
 		float x = Input.GetAxis ("Horizontal");
 		float z = Input.GetAxis ("Vertical");
-		Debug.Log (x + " | " + z);
+		// Debug.Log (x + " | " + z);
 		Vector3 movimento = new Vector3 (x, 0 , z);
 		componenteRb.AddForce (movimento * velocidade);
 	}
