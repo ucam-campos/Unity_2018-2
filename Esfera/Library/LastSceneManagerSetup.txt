@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/01_09_2018/Cenas/cena.unity
-  isLoaded: 1
-  isActive: 1
