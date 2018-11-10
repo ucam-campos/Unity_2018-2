@@ -5,6 +5,12 @@ using UnityEngine;
 public class DestruirContato : MonoBehaviour {
 	public GameObject explosaoAsteroide;
 	public GameObject explosaoJogador;
+	private Jogo jogo;
+
+	void Start () {
+		jogo = GameObject.FindGameObjectWithTag ("GameController")
+						 .GetComponent<Jogo> ();
+	}
 
 	void OnTriggerEnter(Collider outroCollider) {
 		Destroy (outroCollider.gameObject);
@@ -13,6 +19,7 @@ public class DestruirContato : MonoBehaviour {
 					 transform.position, 
 					 transform.rotation);
 		if (outroCollider.CompareTag("Player")) {
+			jogo.FinalizarJogo ();
 			Instantiate (explosaoJogador, 
 						 outroCollider.transform.position, 
 						 outroCollider.transform.rotation);
