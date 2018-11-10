@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Jogo : MonoBehaviour {
 	public GameObject asteroide;
-	// Use this for initialization
+	private bool jogadorVivo;
+
+	public void FinalizarJogo(){
+		jogadorVivo = false;
+		Debug.Log ("Morto");
+	}
+
 	void Start () {
+		jogadorVivo = true;
 		StartCoroutine ("Spawn");
 	}
 
 	IEnumerator Spawn(){
-		while (true) {
+		while (jogadorVivo) {
 			Vector3 posicao = transform.position;
 			Limite limite = new Limite ();
 			posicao.x = Random.Range (limite.xMin, limite.xMax);

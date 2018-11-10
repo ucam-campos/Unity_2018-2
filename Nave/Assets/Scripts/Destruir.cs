@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Destruir : MonoBehaviour {
-	public GameObject explosao;
+	public GameObject explosaoAsteroide;
+	public GameObject explosaoPlayer;
+	private Jogo jogo;
+
+	void Start(){
+		jogo = GameObject.FindGameObjectWithTag ("GameController")
+						 .GetComponent<Jogo> ();
+	}
 
 	void OnTriggerEnter(Collider outro){
 		Destroy (outro.gameObject);
 		Destroy (this.gameObject);
-		Instantiate (explosao, transform.position, transform.rotation);
+		Instantiate (explosaoAsteroide, transform.position, transform.rotation);
+		if (outro.CompareTag ("Player")) {
+			jogo.FinalizarJogo ();
+			Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
+		}
 	}
 }
