@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Limite {
-	public float xMax; 
-	public float xMin; 
-	public float yMax; 
-	public float yMin; 
-}
-	
 public class Controlar : MonoBehaviour {
 	private int velocidade = 6;
 	private Rigidbody rb;
-	// Use this for initialization
+	private Limite limite = new Limite();
+
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		Mover ();
 	}
@@ -27,8 +20,8 @@ public class Controlar : MonoBehaviour {
 		float movVer = Input.GetAxis("Vertical");
 		Vector3 movimento = new Vector3(movHor, 0, movVer);
 		rb.velocity = (movimento*velocidade);
-		float limitarX = Mathf.Clamp (rb.position.x, -6.0f, 6.0f);
-		float limitarZ = Mathf.Clamp (rb.position.z, -1.0f, 17.0f);
+		float limitarX = Mathf.Clamp (rb.position.x, limite.xMin, limite.xMax);
+		float limitarZ = Mathf.Clamp (rb.position.z, limite.yMin, limite.yMax);
 		rb.position = new Vector3 (limitarX, 0, limitarZ);
 	}
 }
