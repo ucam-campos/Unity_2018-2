@@ -13,6 +13,9 @@ public class DestruirContato : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider outroCollider) {
+		if (outroCollider.CompareTag("Limite")) {
+			return;
+		}
 		Destroy (outroCollider.gameObject);
 		Destroy (this.gameObject);
 		Instantiate (explosaoAsteroide, 

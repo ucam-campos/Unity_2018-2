@@ -27,7 +27,7 @@ public class Jogo : MonoBehaviour {
 	}
 	
 	IEnumerator Chover () {
-		while (jogadorVivo) {
+		while (true) {
 			Vector3 posicao = transform.position;
 			posicao.x = Random.Range (limite.xMin, limite.xMax);
 			Instantiate (asteroide, posicao, transform.rotation);
