@@ -8,7 +8,6 @@ public class Atirar : MonoBehaviour {
 	private float proximoDisparo = 0;
 
 	void Start () {
-		
 	}
 
 	void Update () {
@@ -16,6 +15,5 @@ public class Atirar : MonoBehaviour {
 			proximoDisparo = Time.time + frequencia;
 			Instantiate (tiro, transform);
 		}
-		
 	}
 }

@@ -13,12 +13,14 @@ public class Destruir : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider outro){
-		Destroy (outro.gameObject);
-		Destroy (this.gameObject);
-		Instantiate (explosaoAsteroide, transform.position, transform.rotation);
-		if (outro.CompareTag ("Player")) {
-			jogo.FinalizarJogo ();
-			Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
+		if(!outro.CompareTag("ColliderLimite")){
+			Destroy (outro.gameObject);
+			Destroy (this.gameObject);
+			Instantiate (explosaoAsteroide, transform.position, transform.rotation);
+			if (outro.CompareTag ("Player")) {
+				jogo.FinalizarJogo ();
+				Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
+			}
 		}
 	}
 }
