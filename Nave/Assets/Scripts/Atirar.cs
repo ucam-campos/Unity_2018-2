@@ -12,7 +12,6 @@ public class Atirar : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log (Time.time);
 		if ((Input.GetButton ("Fire1") || Input.GetKey(KeyCode.Space)) && Time.time >= proximoDisparo) {
 			proximoDisparo = Time.time + frequencia;
 			Instantiate (tiro, transform);
