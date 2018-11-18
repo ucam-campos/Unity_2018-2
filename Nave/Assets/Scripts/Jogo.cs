@@ -6,6 +6,7 @@ public class Jogo : MonoBehaviour {
 	public GameObject[] asteroides;
 	private bool jogadorVivo;
 	private int indice;
+	private AudioSource musica;
 
 	public void FinalizarJogo(){
 		jogadorVivo = false;
@@ -13,6 +14,8 @@ public class Jogo : MonoBehaviour {
 	}
 
 	void Start () {
+		musica = GetComponent<AudioSource>();
+		musica.Play();
 		Debug.Log(asteroides.Length);
 		jogadorVivo = true;
 		StartCoroutine ("Spawn");
