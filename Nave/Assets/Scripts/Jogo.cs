@@ -35,7 +35,7 @@ public class Jogo : MonoBehaviour {
 			}
 			posicao.x = Random.Range (limite.xMin, limite.xMax);
 			Instantiate (chefe, posicao, transform.rotation);
-			yield return new WaitForSeconds(20);
+			yield return new WaitForSeconds(10);
 		}
 	}
 

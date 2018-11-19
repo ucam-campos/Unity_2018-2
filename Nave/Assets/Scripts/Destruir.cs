@@ -16,9 +16,9 @@ public class Destruir : MonoBehaviour {
 	void OnTriggerEnter(Collider outro){
 		if(!outro.CompareTag("ColliderLimite")){
 			vida--;
+			Instantiate (explosaoAsteroide, transform.position, transform.rotation);
 			if(vida == 0){
 				Destroy (this.gameObject);
-				Instantiate (explosaoAsteroide, transform.position, transform.rotation);
 			}
 		
 			if (outro.CompareTag ("Player")) {
