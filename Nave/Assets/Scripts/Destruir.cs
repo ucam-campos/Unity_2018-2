@@ -9,7 +9,6 @@ public class Destruir : MonoBehaviour {
 	public GameObject explosaoAsteroide;
 	public GameObject explosaoPlayer;
 	private Jogo jogo;
-	private static int pontos = 0;
 
 	void Start(){
 		jogo = GameObject.FindGameObjectWithTag ("GameController")
@@ -25,16 +24,15 @@ public class Destruir : MonoBehaviour {
 				Instantiate (explosaoAsteroide, transform.position, transform.rotation);
 			}
 
-			if(vida == 0){
+			if(vida <= 0){
 				Destroy (this.gameObject);
 				Instantiate (explosaoAsteroide, transform.position, transform.rotation);
-				pontos++;
-				pontuacao.text = "Pontos: "+pontos;
+				Pontuacao.incrementa();
+				pontuacao.text = "Pontos: " + Pontuacao.getPontos();
 			}
 		
 			if (outro.CompareTag ("Player")) {
 				jogo.FinalizarJogo ();
-				pontos = 0;
 				Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
 			}
 

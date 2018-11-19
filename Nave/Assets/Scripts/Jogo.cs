@@ -23,6 +23,7 @@ public class Jogo : MonoBehaviour {
 	}
 
 	public void FinalizarJogo(){
+		Pontuacao.zera();
 		jogadorVivo = false;
 		Debug.Log ("Morto");
 		fimDeJogo.SetActive(true);
