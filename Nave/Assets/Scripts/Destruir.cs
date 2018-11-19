@@ -9,12 +9,11 @@ public class Destruir : MonoBehaviour {
 	public GameObject explosaoAsteroide;
 	public GameObject explosaoPlayer;
 	private Jogo jogo;
-	static int pontos = 0;
+	private static int pontos = 0;
 
 	void Start(){
 		jogo = GameObject.FindGameObjectWithTag ("GameController")
 						 .GetComponent<Jogo> ();
-
 		pontuacao = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Text>();
 	}
 

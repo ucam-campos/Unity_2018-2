@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Jogo : MonoBehaviour {
 	public GameObject[] asteroides;
@@ -8,18 +10,28 @@ public class Jogo : MonoBehaviour {
 	private bool jogadorVivo;
 	private int indice;
 	private AudioSource musica;
-
-	public void FinalizarJogo(){
-		jogadorVivo = false;
-		Debug.Log ("Morto");
-	}
+	private GameObject fimDeJogo;
 
 	void Start () {
+		fimDeJogo = GameObject.FindGameObjectWithTag("FimDeJogo");
+		fimDeJogo.SetActive(false);
 		musica = GetComponent<AudioSource>();
 		musica.Play();
 		Debug.Log(asteroides.Length);
 		jogadorVivo = true;
 		StartCoroutine ("Spawn");
+	}
+
+	public void FinalizarJogo(){
+		jogadorVivo = false;
+		Debug.Log ("Morto");
+		fimDeJogo.SetActive(true);
+	}
+
+	void Update(){
+		if (Input.GetKeyDown(KeyCode.R) && !jogadorVivo) {
+			SceneManager.LoadScene (0);
+		}
 	}
 
 	IEnumerator Spawn(){
@@ -38,7 +50,4 @@ public class Jogo : MonoBehaviour {
 			yield return new WaitForSeconds(10);
 		}
 	}
-
-
-
 }
