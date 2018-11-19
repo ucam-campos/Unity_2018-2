@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Destruir : MonoBehaviour {
+	public int vida;
 	public GameObject explosaoAsteroide;
 	public GameObject explosaoPlayer;
 	private Jogo jogo;
@@ -14,13 +15,18 @@ public class Destruir : MonoBehaviour {
 
 	void OnTriggerEnter(Collider outro){
 		if(!outro.CompareTag("ColliderLimite")){
-			Destroy (outro.gameObject);
-			Destroy (this.gameObject);
-			Instantiate (explosaoAsteroide, transform.position, transform.rotation);
+			vida--;
+			if(vida == 0){
+				Destroy (this.gameObject);
+				Instantiate (explosaoAsteroide, transform.position, transform.rotation);
+			}
+		
 			if (outro.CompareTag ("Player")) {
 				jogo.FinalizarJogo ();
 				Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
 			}
+
+			Destroy (outro.gameObject);	
 		}
 	}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Jogo : MonoBehaviour {
 	public GameObject[] asteroides;
+	public GameObject chefe;
 	private bool jogadorVivo;
 	private int indice;
 	private AudioSource musica;
@@ -22,15 +23,22 @@ public class Jogo : MonoBehaviour {
 	}
 
 	IEnumerator Spawn(){
+		Vector3 posicao = transform.position;
+		Limite limite = new Limite ();
 		while (jogadorVivo) {
-			indice = Random.Range(0,3);
-			Debug.Log(indice);
-			Vector3 posicao = transform.position;
-			Limite limite = new Limite ();
+			for(int i = 0; i<20; i++){
+				indice = Random.Range(0,3);
+				Debug.Log(indice);
+				posicao.x = Random.Range (limite.xMin, limite.xMax);
+				Instantiate (asteroides[indice], posicao, transform.rotation);
+				yield return new WaitForSeconds(1);
+			}
 			posicao.x = Random.Range (limite.xMin, limite.xMax);
-			Instantiate (asteroides[indice], posicao, transform.rotation);
-			yield return new WaitForSeconds(1);
+			Instantiate (chefe, posicao, transform.rotation);
+			yield return new WaitForSeconds(20);
 		}
 	}
+
+
 
 }
