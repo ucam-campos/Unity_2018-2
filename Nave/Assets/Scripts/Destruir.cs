@@ -34,6 +34,7 @@ public class Destruir : MonoBehaviour {
 		
 			if (outro.CompareTag ("Player")) {
 				jogo.FinalizarJogo ();
+				pontos = 0;
 				Instantiate (explosaoPlayer, outro.transform.position, outro.transform.rotation);
 			}
 
