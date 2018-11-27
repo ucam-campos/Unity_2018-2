@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Jogo : MonoBehaviour {
-	public GameObject asteroide;
-	public float frequencia = 0.5f;
-	public GameObject textoFimJogo;
-	private Limite limite = new Limite ();
+	private AudioSource music;
 	private bool jogadorVivo;
+	private GameObject textoFimJogo;
+	public GameObject[] asteroides;
+	public GameObject chefao;
+	private int indice;
+
+	void Start () {
+		textoFimJogo = GameObject.FindGameObjectWithTag("Fim");
+		textoFimJogo.SetActive(false);
+		music = GetComponent<AudioSource>();
+		music.Play();
+		jogadorVivo = true;
+		StartCoroutine ("Chover");
+	}
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.R) && !jogadorVivo) {
@@ -19,19 +30,27 @@ public class Jogo : MonoBehaviour {
 	public void FinalizarJogo () {
 		jogadorVivo = false;
 		textoFimJogo.SetActive (true);
+		Pontuacao.recomecar ();
 	}
 
-	void Start () {
-		jogadorVivo = true;
-		StartCoroutine ("Chover");
-	}
+
 	
 	IEnumerator Chover () {
-		while (true) {
-			Vector3 posicao = transform.position;
+		Limite limite = new Limite ();
+		Vector3 posicao = transform.position;
+		while (jogadorVivo) {
+			for (int i = 0; i < 20; i++) {
+				indice = Random.Range (0, 3);
+				posicao.x = Random.Range (limite.xMin, limite.xMax);
+				Instantiate (asteroides[indice], posicao, transform.rotation);
+				yield return new WaitForSeconds (.8f);
+
+			}
 			posicao.x = Random.Range (limite.xMin, limite.xMax);
-			Instantiate (asteroide, posicao, transform.rotation);
-			yield return new WaitForSeconds (frequencia);
+			Instantiate (chefao, posicao, transform.rotation);
+			yield return new WaitForSeconds (10);
 		}
+				
 	}
 }
+
