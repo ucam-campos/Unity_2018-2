@@ -43,7 +43,7 @@ public class Jogo : MonoBehaviour {
 				indice = Random.Range (0, 3);
 				posicao.x = Random.Range (limite.xMin, limite.xMax);
 				Instantiate (asteroides[indice], posicao, transform.rotation);
-				yield return new WaitForSeconds (.8f);
+				yield return new WaitForSeconds (1.2f);
 
 			}
 			posicao.x = Random.Range (limite.xMin, limite.xMax);
