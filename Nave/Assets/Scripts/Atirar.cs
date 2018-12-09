@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Atirar : MonoBehaviour {
-	public GameObject tiro;
-	public float frequenciaDisparo = 0.5f;
+	
+	public float frequenciaDisparo = 0.4f;
 	private float proximoDisparo = 0;
-	private AudioSource somDisparo;
+    public GameObject tiro;
+    private AudioSource somDisparo;
 
-	void Start () {
-		somDisparo = GetComponent<AudioSource> ();
-	}
+    void Start()
+    {
+        somDisparo = GetComponent<AudioSource>();
+    }
 
-	void Update () {
+
+    void Update () {
 		if (Input.GetButton("Fire1") && Time.time >= proximoDisparo) {
 			proximoDisparo = Time.time + frequenciaDisparo;
 			Instantiate (tiro, transform);
-			somDisparo.Play ();
-		}
+            Instantiate(tiro, new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z + 0.8f), transform.rotation);
+            Instantiate(tiro, new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z + 0.8f), transform.rotation);
+            somDisparo.Play();
+        }
 	}
 }
